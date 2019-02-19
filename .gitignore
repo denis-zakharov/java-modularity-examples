@@ -1,2 +1,7 @@
 out*/
 *.class
+
+# vs code
+.project
+.classpath
+.settings
