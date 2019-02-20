@@ -1,7 +1,7 @@
 out*/
 *.class
 
-*-image/
+*image/
 
 # vs code
 .project
