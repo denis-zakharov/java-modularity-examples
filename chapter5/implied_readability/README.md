@@ -7,4 +7,12 @@ src/easytext.client/easytext/client/Client.java:13: error: Text.wordcount() in p
 1 error
 ```
 
-Fixed by `requires transitive` in `src/easytext.repository.api/module-info.java`
+Fixed by `requires transitive` in `src/easytext.repository.api/module-info.java`.
+
+Use `-Xlint:exports` to check explicit dependencies wich could be replaced with implied readability.
+```
+src/easytext.repository.api/easytext/repository/api/TextRepository.java:6: warning: [exports] class Text in module easytext.domain.api is not indirectly exported using requires transitive
+  Text findText(String id);
+  ^
+1 warning
+```
