@@ -63,3 +63,11 @@ A module can play a role of an API owner, service provider, and consumer and the
 
 ### Service Type Inspection and Lazy Instantiation
 The `stream` method on `ServiceLoader` returns a stream of `ServiceLoader.Provider` objects to inspect.
+
+## Implied Readability
+A module M1 can define `requires transitive dependency.module.name`. It means if another module M2 `requires M1` it also implicitly requires transitive dependencies of the module M1 (that is dependency.module.name in this case).
+
+## Compile-time Dependencies
+A module M1 can define `requires static dependency.module.name`. It means dependency.module.name is strictly required only for compilation. We can run M1 without dependency.module.name on the module path if there is a defensive fallback code. Static dependencies should be explicitly added to module resolution.
+
+When M1 exports a type from optional dependency it should be defined as `requires transitive static dependency.module.name`. A better solution is implementing optional dependencies using services.
