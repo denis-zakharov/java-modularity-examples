@@ -83,3 +83,7 @@ The `Module` API exposes `getResourceAsStream` to load a resource from that modu
 The `ModuleLayer` API exposes `findModule` to find an optional of `Module` on the module path.
 
 Resource encapsulation applies only to resources inside packages in a module (if module does not export any package you can read only its top-level resources; exception is made for **.class* files and non-valid package name paths, e.g. META-INF).
+
+
+## Reading Using ResourceBundleProvider Service
+See javadoc for `ResourceBundleProvider::getBundle(String basename, Locale locale) : ResourceBundle` and `ResourceBundle::getBundle` methods. The module usage is similar to ServiceProvider interface.
