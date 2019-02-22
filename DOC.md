@@ -71,3 +71,15 @@ A module M1 can define `requires transitive dependency.module.name`. It means if
 A module M1 can define `requires static dependency.module.name`. It means dependency.module.name is strictly required only for compilation. We can run M1 without dependency.module.name on the module path if there is a defensive fallback code. Static dependencies should be explicitly added to module resolution.
 
 When M1 exports a type from optional dependency it should be defined as `requires transitive static dependency.module.name`. A better solution is implementing optional dependencies using services.
+
+# Resource Usage
+
+## Reading From the Same Module
+Existing code does not have to be changed for loading resources. As long as the `Class` instance you’re calling `getResource{AsStream}(String pathRelativeToClassLocation)` (or `"/pathStartingFromModuleTopLevel"`) on belongs to the current module containing the resource, you get back a proper InputStream or URL. On the other hand, when the `Class` instance comes from another module, `null` will be returned because of resource encapsulation.
+
+The `Module` API exposes `getResourceAsStream` to load a resource from that module. Resources in a package can be referred to in an absolute way by replacing the dots in the package name with slashes and appending the filename. For example, *javamodularity.firstresourcemodule* becomes *javamodularity/firstresourcemodule*. After adding the filename, the argument to load a resource in a package becomes *javamodularity/firstresourcemodule/resource_in_package.txt*. A top-level resource can be referenced like *top_level_file.txt*.
+
+## Reading From Other Module
+The `ModuleLayer` API exposes `findModule` to find an optional of `Module` on the module path.
+
+Resource encapsulation applies only to resources inside packages in a module (if module does not export any package you can read only its top-level resources; exception is made for **.class* files and non-valid package name paths, e.g. META-INF).
