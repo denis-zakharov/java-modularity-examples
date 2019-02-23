@@ -3,6 +3,8 @@ package javamodularity.introspection;
 import java.util.*;
 import java.lang.module.*;
 import java.lang.module.ModuleDescriptor.Exports;
+import java.lang.module.ModuleDescriptor.Opens;
+import java.lang.module.ModuleDescriptor.Requires;
 
 public class Introspection {
 
@@ -27,6 +29,12 @@ public class Introspection {
     // Through ModuleDescriptor, all information from module-info.java is exposed:
     Set<Exports> exports = descriptor.exports(); // All exports, possibly qualified
     System.out.println("Exports: " + exports);
+
+    Set<Requires> requires = descriptor.requires();
+    System.out.println("Requires: " + requires);
+
+    Set<Opens> opens = descriptor.opens();
+    System.out.println("Opens: " + opens);
 
     Set<String> uses = descriptor.uses(); // All services used by this module
     System.out.println("Uses: " + uses);

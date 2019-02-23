@@ -88,7 +88,7 @@ Resource encapsulation applies only to resources inside packages in a module (if
 ## Reading Using ResourceBundleProvider Service
 See javadoc for `ResourceBundleProvider::getBundle(String basename, Locale locale) : ResourceBundle` and `ResourceBundle::getBundle` methods. The module usage is similar to ServiceProvider interface.
 
-# Deep Reflection Access
+# Reflective Access
 
 Access to a module at once.
 ```
@@ -109,3 +109,6 @@ Command line flag to open access to thirdparty or JDK module from target module 
 
 ## JEP 193: MethodHandles and VarHandles
 This is an alternative to reflection-based access. Applications can pass a `java.lang.invoke.Lookup` instance with the right permissions to the framework, explicitly delegating private lookup capabilities. The framework module can then, using `MethodHandles.privateLookupIn(Class, Lookup)`, access nonpublic members on classes from the application module. See `chapter6/lookup` example.
+
+# Module Introspection
+`Module` and `ModuleDescriptor` APIs allows to get info about module name, its packages, `exports`, `requires`, `uses`, `opens`, and `provides` descriptors.
