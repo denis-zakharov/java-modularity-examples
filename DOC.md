@@ -126,3 +126,17 @@ You can escallate priveledges of the module only be calling moidifcation methods
 
 ## Annotations
 Modules can be annotated with a new annotation Target.MODULE.
+
+
+# Migration
+
+# Without modules
+* --illegal-access=[permit, warn, debug, deny]
+* --add-opens java.base/java.lang=ALL-UNNAMED opens java.lang package for all classpath (the unnammed module).
+* --add-exports module.name/package.name=CONSUMER-MODULE1,CONSUMER-MODULE2
+
+# Arguments Files
+```java/javac @arguments.txt```
+
+# Removed and Encapsulated types
+```jdeps -jdkinternals removed/RemovedTypes.class``` analyze replacements for deprecated APIs (only for compiled classes).
