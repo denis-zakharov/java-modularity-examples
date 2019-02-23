@@ -1,0 +1,3 @@
+module accessor {
+    requires deepreflection;
+}

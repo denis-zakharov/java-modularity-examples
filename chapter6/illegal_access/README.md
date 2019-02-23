@@ -1,0 +1,1 @@
+An example of IllegalAccessException and InaccessibleObjectException during reflective access.
