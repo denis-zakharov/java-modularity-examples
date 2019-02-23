@@ -110,5 +110,19 @@ Command line flag to open access to thirdparty or JDK module from target module 
 ## JEP 193: MethodHandles and VarHandles
 This is an alternative to reflection-based access. Applications can pass a `java.lang.invoke.Lookup` instance with the right permissions to the framework, explicitly delegating private lookup capabilities. The framework module can then, using `MethodHandles.privateLookupIn(Class, Lookup)`, access nonpublic members on classes from the application module. See `chapter6/lookup` example.
 
-# Module Introspection
+## Module Introspection
 `Module` and `ModuleDescriptor` APIs allows to get info about module name, its packages, `exports`, `requires`, `uses`, `opens`, and `provides` descriptors.
+
+## Module Modification
+Module has four methods that allow run-time modifications:
+* addExports(String packageName, Module target) Expose previously nonexported packages to another module.
+* addOpens(String packageName, Module target) Opens a package for deep reflection to another module.
+* addReads(Module other) Adds a reads relation from the current module to another module.
+* addUses(Class<?> serviceType) Indicates that the current module wants to use additional service types with ServiceLoader.
+
+There’s no addProvides method, because exposing new implementation not known at compile-time considered as a rare use-case.
+
+You can escallate priveledges of the module only be calling moidifcation methods from inside.
+
+## Annotations
+Modules can be annotated with a new annotation Target.MODULE.
