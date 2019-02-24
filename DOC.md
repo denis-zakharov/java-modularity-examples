@@ -130,13 +130,25 @@ Modules can be annotated with a new annotation Target.MODULE.
 
 # Migration
 
-# Without modules
+## Java/Javac Command Line Arguments
 * --illegal-access=[permit, warn, debug, deny]
 * --add-opens java.base/java.lang=ALL-UNNAMED opens java.lang package for all classpath (the unnammed module).
 * --add-exports module.name/package.name=CONSUMER-MODULE1,CONSUMER-MODULE2
+* continue using class path
 
-# Arguments Files
+## Arguments Files
 ```java/javac @arguments.txt```
 
-# Removed and Encapsulated types
+## Removed and Encapsulated types
 ```jdeps -jdkinternals removed/RemovedTypes.class``` analyze replacements for deprecated APIs (only for compiled classes).
+
+## Mixing classpath and modulepath with automatic modules
+For example, jackson-databind-2.8.8.jar without module descriptor becomes an *automatic module* jackson.databind on the module path.
+* It does not contain `module-info.class.`
+* It has a module name specified in `META-INF/MANIFEST.MF` or derived from its filename.
+* It `requires transitive` all other resolved modules.
+* It exports all its packages.
+* It reads the classpath (or more precisely, the `unnamed module` as discussed later).
+* It cannot have split packages with other modules.
+
+![JARs, module path, and class path](UnnamedModule.png)
