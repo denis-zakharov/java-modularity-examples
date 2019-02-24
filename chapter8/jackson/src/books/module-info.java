@@ -1,4 +1,5 @@
 module books {
     requires jackson.databind;
-    opens demo;
+
+    opens demo to jackson.databind;
 }
